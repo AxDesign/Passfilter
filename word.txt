@@ -1,5 +1,5 @@
-Voiture
-Rouge
-Maison
-Mot de passe
-Test
+voiture
+rouge
+maison
+mot de passe
+test

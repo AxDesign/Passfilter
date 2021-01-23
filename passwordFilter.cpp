@@ -4,10 +4,9 @@
 #include <string>
 
 using namespace std;
+void passwordIsValid(vector<string> wordList, string userWord){
 
-void displayFile(vector<string> wordList){
     ifstream flux("word.txt");
-
     if(flux){
         string line;
         while(getline(flux, line)){
@@ -17,15 +16,9 @@ void displayFile(vector<string> wordList){
     else{
         cout << "ERREUR: Impossible de lire le fichier !" << endl;
     }
-    for (const string& word : wordList)
-    {
-        cout << word << endl;
-    }
-}
 
-void passwordIsValid(vector<string> wordList, string userWord){
     bool isValid = true;
-    for (const string& word : wordList)
+    for (const string word : wordList)
     {
         if(word == userWord){
             cout << "Mot de passe refuse car il contient le mot " + word << endl;
@@ -54,9 +47,6 @@ int main()
     getline(cin, userWord);
     userWord = convertLowerCase(userWord);
     cout << userWord << endl;
-
-    
-
-    cout << endl;
+    passwordIsValid(wordList, userWord);
 
 }
