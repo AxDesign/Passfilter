@@ -1,4 +1,4 @@
-voiture
+lavoitures
 rouge
 maison
 mot de passe
