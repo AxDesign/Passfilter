@@ -23,7 +23,6 @@ void passwordIsValid(vector<string> wordList, string userWord){
 
     cout << "Lecture du fichier termine" << endl;
 
-    bool isValid = true;
 
     regex patternChar {"3"};
     string target = userWord;
@@ -66,12 +65,15 @@ void passwordIsValid(vector<string> wordList, string userWord){
     cout << "Remplacer les 0 par des o: " << resultat << endl;
     target = resultat;
 
+    bool isValid = true;
+
     for (const string word : wordList)
     {
 
         regex patternWord {word};
-        bool result = regex_search(target, patternWord);
-        if(result){
+        bool resultWord = regex_search(target, patternWord);
+
+        if(resultWord){
             cout << "Mot de passe refuse car il contient le mot " + word << endl;
             isValid = false;
         }
@@ -87,6 +89,8 @@ string convertLowerCase(string phrase){
     }
     return phrase;
 }
+
+
 
 int main()
 {
