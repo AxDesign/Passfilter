@@ -1,18 +1,17 @@
-#include <iostream>
-#include <fstream>
 #include <vector>
 #include <string>
 #include <regex>
+#include <iostream>
+#include <fstream>
 
 using namespace std;
-void passwordIsValid(vector<string> wordList, string userWord){
 
-    ifstream flux("word.txt");
 
-    cout << "Lecture du fichier..." << endl;
+void passwordIsValid(vector<wstring> wordList, wstring userWord){
+    wifstream flux("word.txt");
     
     if(flux){
-        string line;
+        wstring line;
         while(getline(flux, line)){
             wordList.push_back(line);
         }
@@ -21,69 +20,60 @@ void passwordIsValid(vector<string> wordList, string userWord){
         cout << "ERREUR: Impossible de lire le fichier !" << endl;
     }
 
-    cout << "Lecture du fichier termine" << endl;
-
-
-    regex patternChar {"3"};
-    string target = userWord;
-    string remplacement {"e"};
-    string resultat = regex_replace(target, patternChar, remplacement);
+    wregex patternChar {L"3"};
+    wstring target = userWord;
+    wstring remplacement {L"e"};
+    wstring resultat = regex_replace(target, patternChar, remplacement);
     target = resultat;
-    cout << "Remplacer les 3 par des e: " << resultat << endl;
 
-    patternChar = "[@4]";
-    remplacement = "a";
+    patternChar = L"[@4]";
+    remplacement = L"a";
     resultat = regex_replace(target, patternChar, remplacement);
     target = resultat;
-    cout << "Remplacer les @ et 4 par des a: " << resultat << endl;
 
-    patternChar = "[!|/]";
-    remplacement = "i";
+    patternChar = L"[!|/]";
+    remplacement = L"i";
     resultat = regex_replace(target, patternChar, remplacement);
     target = resultat;
-    cout << "Remplacer les ! | et / par des i: " << resultat << endl;
     target = resultat;
 
-    patternChar = "[?$25]";
-    remplacement = "s";
+    patternChar = L"[?$25]";
+    remplacement = L"s";
     resultat = regex_replace(target, patternChar, remplacement);
     target = resultat;
-    cout << "Remplacer les ? $ 2 et 5 par des s: " << resultat << endl;
     target = resultat;
     
-    patternChar = "[1]";
-    remplacement = "l";
+    patternChar = L"[1]";
+    remplacement = L"l";
     resultat = regex_replace(target, patternChar, remplacement);
     target = resultat;
-    cout << "Remplacer les 1 par des l: " << resultat << endl;
     target = resultat;
     
-    patternChar = "[0]";
-    remplacement = "o";
+    patternChar = L"[0]";
+    remplacement = L"o";
     resultat = regex_replace(target, patternChar, remplacement);
     target = resultat;
-    cout << "Remplacer les 0 par des o: " << resultat << endl;
     target = resultat;
 
     bool isValid = true;
 
-    for (const string word : wordList)
+    for (const wstring word : wordList)
     {
 
-        regex patternWord {word};
+        wregex patternWord {word};
         bool resultWord = regex_search(target, patternWord);
 
         if(resultWord){
-            cout << "Mot de passe refuse car il contient le mot " + word << endl;
+            wcout << "Mot de passe refuse car il contient le mot " << word << endl;
             isValid = false;
         }
     }
     if(isValid){
-        cout << "Mot de passe accepte !" << endl;
+        wcout << "Mot de passe accepte !" << endl;
     }
 }
 
-string convertLowerCase(string phrase){
+wstring convertLowerCase(wstring phrase){
     for(int i=0; i<phrase.size(); i++){
         phrase[i] = tolower(phrase[i]);
     }
@@ -94,16 +84,13 @@ string convertLowerCase(string phrase){
 
 int main()
 {
-    vector<string> wordList;
-    string password;
-    string userWord;
+    vector<wstring> wordList;
+    wstring password;
+    wstring userWord;
     
-    cout << "Entrez un mot de passe:";
-    getline(cin, password);
+    wcout << "Entrez un mot de passe:";
+    getline(wcin, password);
     userWord = password;
     userWord = convertLowerCase(userWord);
-    cout << "Convertit en minuscule: " << userWord << endl;
     passwordIsValid(wordList, userWord);
-    cout << "Le mot de passe est: " << password << endl;
-    cout << "Le mot de passe en minuscule est: " << userWord << endl;
 }
